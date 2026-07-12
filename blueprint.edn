@@ -1,0 +1,11 @@
+[{:itonami.blueprint/id "cloud-itonami-isco-2413"
+  :itonami.blueprint/name "Community Financial Analysis"
+  :itonami.blueprint/isco-08 "2413"
+  :itonami.blueprint/domain :finance/financial-analysis
+  :itonami.blueprint/license "AGPL-3.0-or-later"
+  :itonami.blueprint/social-impact [:financial-transparency :small-business-support :local-jobs]
+  :itonami.blueprint/governor :financial-analysis-governor
+  :itonami.blueprint/robotics true
+  :itonami.blueprint/required-technologies [:robotics :identity :forms :dmn :bpmn :audit-ledger]
+  :itonami.blueprint/status :public-oss
+  :db/id -1}]

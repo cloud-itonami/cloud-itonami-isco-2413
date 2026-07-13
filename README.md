@@ -5,11 +5,25 @@ Open Business Blueprint for **ISCO-08 2413**: Financial Analysts — an ISCO
 pure-cognitive work, the LLM-first wave, **no robotics gate** —
 eligible for actor implementation now.
 
-**Maturity: `:blueprint`** — blueprint only; **no actor implementation
-yet**, and none is claimed. The implemented actor will follow the
-fleet-standard pattern (advisor-LLM sealed behind the independent
-`:financial-analysis-governor` governor, human approval workflow, append-only
-audit ledger). Fifth wave-0 cognitive batch (ADR-2607122700 addenda).
+**Maturity: `:implemented`** — FinancialAnalystsAdvisor ⊣
+FinancialAnalystsGovernor as a langgraph StateGraph
+(`intake → advise → govern → decide → commit/hold`, human-approval
+interrupt), modeled on cloud-itonami-isco-4311's bookkeeping actor.
+13 tests / 27 assertions green.
+
+The analyst HARD invariants — set validity and disclosure
+completeness, not editorial judgement:
+
+1. **Rating validity** — the proposed rating must be a member of the
+   security's registered valid-ratings scale (no invented rating
+   category).
+2. **Conflict disclosure** — the proposed disclosed-conflicts set must
+   be a superset of the security's registered known-conflicts set — an
+   undisclosed conflict is detected by set difference.
+
+Also HARD: unregistered/foreign security, unregistered organization,
+non-`:propose` effect. Escalations (always human sign-off):
+`:publish-rating` (external publication), low confidence (< 0.6).
 
 Scope honesty: ANALYSIS only — regulated investment advice and any trade execution are out of scope for this blueprint (a different licensing regime and a different ISCO code).
 

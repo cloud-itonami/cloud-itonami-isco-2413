@@ -1,0 +1,35 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; ISCO 2413, financial analysts. The README calls this pure-cognitive work
+;; with no robotics gate; blueprint.edn nevertheless declares
+;; :itonami.blueprint/robotics true. The physical work declared here is the
+;; office handling the occupation itself entails (ASSUMPTION, not stated in the
+;; README): loading paper reams into the report printer, and delivering the
+;; printed analysis packs to the boardroom. Replace with the README premise
+;; once one is written.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-2413"
+ :cases
+ [{:id :ream-into-printer-tray
+   :kind :manipulator
+   :procedure "arm lifts reams of A4 paper from the supply box into the high-capacity tray of the report printer"
+   :params {:l1-m 0.45 :l2-m 0.40 :m1-kg 3.5 :m2-kg 2.5
+            :from [0.55 -0.20] :to [0.35 0.35] :duration-s 2.0 :steps 500}
+   :sweep {:param :payload-kg :values [2.5 5.0 7.5 10.0 12.5]}
+   :quantity :peak-tau1-nm
+   :limit {:max 60.0 :basis "estimate: continuous shoulder torque of a light collaborative arm (~5 kg class); a ream of 80 g/m2 A4 is ~2.5 kg"}
+   :boundary {:lo 0.5 :hi 30.0}}
+  {:id :analysis-pack-to-boardroom
+   :kind :transport
+   :procedure "office AMR delivers the printed quarterly analysis packs from the print room to the boardroom"
+   :params {:mass-kg 35.0 :payload-kg 20.0 :v-max-mps 1.0 :a-max-mps2 0.5
+            :brake-decel-mps2 0.7 :drive-force-n 70.0 :crr 0.02
+            :cog-height-m 0.55 :support-half-length-m 0.25}
+   :sweep {:param :distance-m :values [15.0 30.0 50.0 70.0 90.0]}
+   :quantity :cycle-time-s
+   :limit {:max 60.0 :basis "estimate: packs must arrive within a minute of the print job finishing, before the meeting starts"}
+   :boundary {:lo 5.0 :hi 200.0}}]}

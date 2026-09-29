@@ -1,6 +1,6 @@
 (ns finanalyst.actor
   "FinancialAnalystsActor — the ISCO-08 2413 community finanalyst actor as a
-  `langgraph.graph/state-graph` (ADR-2607011000 / CLAUDE.md Actors
+  `langgraph.graph/state-graph` (ADR-2607011000 / AGENTS.md Actors
   section). One graph run = one finanalyst operation request
   (intake → advise → govern → decide → commit/hold, with a
   human-approval interrupt for escalated proposals). No infinite
